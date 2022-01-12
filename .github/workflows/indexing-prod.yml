@@ -21,15 +21,15 @@ jobs:
       - name: Yarn cache setup
         uses: c-hive/gha-yarn-cache@v2
         with:
-          directory: .k8s
+          directory: .socialgouv
 
       - name: Install kosko-charts dependencies
         shell: bash
-        run: yarn --cwd .k8s install --frozen-lockfile --prefer-offline
+        run: yarn --cwd .socialgouv install --frozen-lockfile --prefer-offline
 
       - name: Generate indexing job
         shell: bash
-        run: yarn --cwd .k8s --silent generate --env prod jobs/indexing > indexing.yml
+        run: yarn --cwd .socialgouv --silent generate --env prod jobs/indexing > indexing.yml
         env:
           RANCHER_PROJECT_ID: ${{ secrets.RANCHER_PROJECT_ID }}
           SOCIALGOUV_BASE_DOMAIN: ${{ secrets.SOCIALGOUV_BASE_DOMAIN }}
